@@ -28,7 +28,7 @@ function App() {
     let input1 = `feeling ${inputvalue.feeling} right now, they currently are ${inputvalue.work} and facing ${inputvalue.issue} issues today`;
     fetch("https://gpt-api.richexplorer.com/api/general", {
       method: "POST",
-      mode:"no-cors",
+      mode: "no-cors",
       headers: {
         "Content-Type": "applicaltion/json",
       },
@@ -36,7 +36,7 @@ function App() {
         usecase: "GPT_MEDITATION_CREATOR",
         userInput: input1,
       }),
-    }).then((res) => res.json())
+    })
       .then((res) => setdata(res?.generatedText))
       .catch((err) => console.log(err));
   };
@@ -118,28 +118,8 @@ function App() {
           </Box>
         </Stack>
       </Flex>
-      <ElevenLabsComponent props={data}/>
-      <p>
-        {" "}
-        \n\nStart by having the user focus on their breath. Take slow, deep
-        breaths in and out through the nose. Focus on each inhalation and
-        exhalation, allowing your body to relax with each breath. As you
-        breathe, picture a calming color or scene that brings you peace and joy;
-        allow yourself to be surrounded by this image as you continue to take
-        deep breaths in and out. \n\nNext, try a simple body scan meditation
-        where you bring awareness to different parts of your body one at a time
-        while focusing on breathing deeply into those areas. Start from your
-        feet up towards the head noticing any tension or tightness present
-        without judgment but simply observing it for what it is before releasing
-        it with each exhale until all of your body feels relaxed and comfortable
-        again. \n\nFinally, imagine yourself in an ideal situation free from
-        whatever issues are causing nervousness today - whether that be work
-        related stress or something else entirely - picturing yourself doing
-        something enjoyable such as going for a walk outside or taking some time
-        off just for yourself can help create positive emotions which will
-        eventually replace negative ones over time if practiced regularly
-        enough!
-      </p>
+      <ElevenLabsComponent props={data} />
+      <p>{data}</p>
     </div>
   );
 }
