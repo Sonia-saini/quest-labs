@@ -23,20 +23,21 @@ function App() {
     const { name, value } = e.target;
     setInputvalue({ ...inputvalue, [name]: value });
   };
-  let searchdata = (inputvalue) => {
+  let searchdata = () => {
     console.log(inputvalue, "input");
-    let input1 = `feeling ${inputvalue.feeling} right now, they currently are ${inputvalue.work} and facing ${inputvalue.issue} issues today`;
+    let payload = {
+      usecase: "GPT_MEDITATION_CREATOR",
+      userInput: `"feeling ${inputvalue.feeling} right now, they currently are ${inputvalue.work} and facing ${inputvalue.issue} issues today`,
+    };
     fetch("https://gpt-api.richexplorer.com/api/general", {
       method: "POST",
-      mode: "no-cors",
+      mode:"no-cors",
       headers: {
         "Content-Type": "applicaltion/json",
       },
-      body: JSON.stringify({
-        usecase: "GPT_MEDITATION_CREATOR",
-        userInput: input1,
-      }),
+      body: JSON.stringify(payload),
     })
+      .then((res) => res.json())
       .then((res) => setdata(res?.generatedText))
       .catch((err) => console.log(err));
   };
@@ -109,7 +110,7 @@ function App() {
                   _hover={{
                     bg: "blue.500",
                   }}
-                  onClick={() => searchdata(inputvalue)}
+                  onClick={searchdata}
                 >
                   Get a Meditation Response
                 </Button>
